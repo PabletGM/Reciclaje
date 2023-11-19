@@ -15,9 +15,10 @@ public class MovementPhysics : MonoBehaviour
     //force of the shoot
     private float forceMultiplier =1f;
 
-
+    private float maxDistance = 80;
 
     private Rigidbody rb;
+
 
 
 
@@ -43,8 +44,17 @@ public class MovementPhysics : MonoBehaviour
             Vector3 forceInit = (Input.mousePosition - mousePressDownPos);
             Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * forceMultiplier;
 
-        
+            float distance = Vector3.Distance(Input.mousePosition, mousePressDownPos) * forceMultiplier;
+            Debug.Log(distance);
+        if (distance <= maxDistance)
+        {
+
             DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
+        }
+        else
+        {
+            DrawTrajectory.Instance.HideLine();
+        }
     }
 
     /// <summary>
@@ -57,20 +67,30 @@ public class MovementPhysics : MonoBehaviour
 
         //direction where the shot will go
         Vector3 direction = mouseReleasePos - mousePressDownPos;
-        Shoot(direction);
+        float distance = Vector3.Distance(mouseReleasePos, mousePressDownPos);
+        Shoot(direction,distance);
     }
 
     
 
     //shooting with force on Y axis
-    void Shoot(Vector3 Force)
+    void Shoot(Vector3 Force, float distance)
     {
 
         //si quieres que sea misma fuerza todos los tiros
         //rb.AddForce(new Vector3(-Force.x, -Force.y,0).normalized * forceMultiplier);
         //si quieres que se pueda recargar y cuanto mas tirachinas mas fuerte
-        Debug.Log(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
-        rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
+
+        
+        //si supera limites de fuerza no tiramos
+        
+        if(distance <= maxDistance)
+        {
+            rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
+        }
+            
+        
+        
     }
 
    
