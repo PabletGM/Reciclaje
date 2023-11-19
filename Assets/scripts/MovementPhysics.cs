@@ -19,8 +19,28 @@ public class MovementPhysics : MonoBehaviour
 
     private Rigidbody rb;
 
+    public float raycastDistance = 0.1f; // Distancia del rayo hacia abajo
+    public LayerMask groundLayer; // Capa que representa el suelo
+    private bool isGrounded;
+    private bool canShoot = false;
 
 
+
+    private void Update()
+    {
+        // Lanza un rayo hacia abajo desde la posición del jugador
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, raycastDistance, groundLayer);
+
+        // Comprueba si el jugador está en el suelo
+        if (isGrounded)
+        {
+            canShoot = true;
+        }
+        else
+        {
+            canShoot= false;
+        }
+    }
 
     void Start()
     {
@@ -45,8 +65,8 @@ public class MovementPhysics : MonoBehaviour
             Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * forceMultiplier;
 
             float distance = Vector3.Distance(Input.mousePosition, mousePressDownPos) * forceMultiplier;
-            Debug.Log(distance);
-        if (distance <= maxDistance)
+            //Debug.Log(distance);
+        if (distance <= maxDistance && canShoot)
         {
 
             DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
@@ -68,7 +88,12 @@ public class MovementPhysics : MonoBehaviour
         //direction where the shot will go
         Vector3 direction = mouseReleasePos - mousePressDownPos;
         float distance = Vector3.Distance(mouseReleasePos, mousePressDownPos);
-        Shoot(direction,distance);
+        //para que tenga permiso debe detectar un raycast que está en el suelo
+        if(canShoot)
+        {
+            Shoot(direction, distance);
+        }
+        
     }
 
     

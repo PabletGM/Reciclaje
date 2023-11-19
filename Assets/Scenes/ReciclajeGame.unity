@@ -382,18 +382,18 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.86848116, g: 0.9528302, b: 0.13034001, a: 1}
-      key1: {r: 0, g: 0, b: 0, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 0.13383985, g: 1, b: 0, a: 1}
+      key2: {r: 0.9963192, g: 1, b: 0, a: 0}
+      key3: {r: 0.13383985, g: 1, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 65535
-      ctime2: 0
-      ctime3: 0
+      ctime0: 8481
+      ctime1: 8674
+      ctime2: 34695
+      ctime3: 65535
       ctime4: 0
       ctime5: 0
       ctime6: 0
@@ -406,12 +406,12 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_ColorSpace: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 4
       m_NumAlphaKeys: 2
     numCornerVertices: 0
-    numCapVertices: 6
+    numCapVertices: 1
     alignment: 0
     textureMode: 0
     textureScale: {x: 1, y: 1}
@@ -1668,7 +1668,7 @@ GameObject:
   - component: {fileID: 1483479823}
   - component: {fileID: 1483479822}
   - component: {fileID: 1483479824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: suelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1998,6 +1998,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b283f6df038a74995026f593b42625, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastDistance: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!54 &1851523877
 Rigidbody:
   m_ObjectHideFlags: 0
