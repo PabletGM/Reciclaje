@@ -13,10 +13,12 @@ public class MovementPhysics : MonoBehaviour
     private Vector3 mouseReleasePos;
 
     //force of the shoot
-    private float forceMultiplier = 60f;
+    private float forceMultiplier = 2f;
+
 
 
     private Rigidbody rb;
+
 
 
     void Start()
@@ -29,8 +31,20 @@ public class MovementPhysics : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
+
         mousePressDownPos = Input.mousePosition;
-        Debug.Log("Hola");
+
+    }
+
+    //se llama cuando se acaba de hacer el drag
+    private void OnMouseDrag()
+    {
+        //fuerza inicial
+            Vector3 forceInit = (Input.mousePosition - mousePressDownPos);
+            Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * forceMultiplier;
+
+        
+            DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
     }
 
     /// <summary>
@@ -38,8 +52,9 @@ public class MovementPhysics : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
+        DrawTrajectory.Instance.HideLine();
         mouseReleasePos = Input.mousePosition;
-        Debug.Log("Adios");
+
         //direction where the shot will go
         Vector3 direction = mouseReleasePos - mousePressDownPos;
         Shoot(direction);
@@ -50,10 +65,15 @@ public class MovementPhysics : MonoBehaviour
     //shooting with force on Y axis
     void Shoot(Vector3 Force)
     {
-        Debug.Log("disparo!");
+
         //si quieres que sea misma fuerza todos los tiros
-        rb.AddForce(new Vector3(-Force.x, -Force.y,0).normalized * forceMultiplier);
+        //rb.AddForce(new Vector3(-Force.x, -Force.y,0).normalized * forceMultiplier);
         //si quieres que se pueda recargar y cuanto mas tirachinas mas fuerte
-        //rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
+        Debug.Log(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
+        rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
     }
+
+   
+
+
 }
