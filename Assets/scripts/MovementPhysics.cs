@@ -13,7 +13,7 @@ public class MovementPhysics : MonoBehaviour
     private Vector3 mouseReleasePos;
 
     //force of the shoot
-    private float forceMultiplier = 2f;
+    private float forceMultiplier =1f;
 
 
 

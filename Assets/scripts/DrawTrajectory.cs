@@ -9,8 +9,7 @@ public class DrawTrajectory : MonoBehaviour
     private LineRenderer _lineRenderer;
 
     [SerializeField]
-    [Range(3, 30)]
-    private int _lineSegmentCount = 20;
+    private int _lineSegmentCount;
 
     private List<Vector3> _linePoints = new List<Vector3>();
 
@@ -34,7 +33,7 @@ public class DrawTrajectory : MonoBehaviour
         //un trozo de linea o segmento
         float stepTime = FlightDuration / _lineSegmentCount;
 
-        _linePoints.Clear();
+
 
         for (int i = 0; i < _lineSegmentCount; i++)
         {
@@ -53,8 +52,9 @@ public class DrawTrajectory : MonoBehaviour
 
         _lineRenderer.positionCount = _linePoints.Count;
         _lineRenderer.SetPositions(_linePoints.ToArray());
+        _linePoints.Clear();
     }
-    
+
     public void HideLine()
     {
         _lineRenderer.positionCount = 0;
