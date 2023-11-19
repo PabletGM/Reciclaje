@@ -51,7 +51,8 @@ public class GameController : MonoBehaviour
         //iniciamos basura en todos los spots
         for (int i = 0; i < respawns.Length; i++)
         {
-            Instantiate(basura, respawns[i].transform.position, Quaternion.identity);
+            respawns[i].transform.Rotate(new Vector3(-90, 0, 0));
+            Instantiate(basura, respawns[i].transform.position, Quaternion.identity);  
         }
         
     }
