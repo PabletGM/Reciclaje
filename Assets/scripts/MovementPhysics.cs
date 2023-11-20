@@ -68,7 +68,6 @@ public class MovementPhysics : MonoBehaviour
             //Debug.Log(distance);
         if (distance <= maxDistance && canShoot)
         {
-
             DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
         }
         else
