@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     public Camera cam;
 
-    private float velocidadRotacion = 0.5f;
+    private float velocidadRotacion = 8f;
 
     private void Awake()
     {
@@ -74,7 +74,7 @@ public class UIManager : MonoBehaviour
 
         while (t < 1f)
         {
-            t += Time.deltaTime * velocidadRotacion;
+            t += Time.deltaTime / velocidadRotacion;
 
             // Utiliza Lerp para aplicar una rotación gradual
             cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, rotacionFinal, t);

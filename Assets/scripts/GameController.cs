@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
 
     private int scoreToAdd = 2;
 
-    private int totalTimeNormal = 4;
+    private int totalTimeNormal = 10;
 
 
     private float actualTime = 0;
