@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
 
     private float velocidadRotacion = 8f;
 
+
     private void Awake()
     {
         if (instance != null)
@@ -51,7 +52,11 @@ public class UIManager : MonoBehaviour
 
     public void ComenzarCorrutinaCamara()
     {
+
+
         StartCoroutine(CamaraRotation());
+
+       
     }
 
 
