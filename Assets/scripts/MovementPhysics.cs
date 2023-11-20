@@ -7,8 +7,21 @@ using UnityEngine;
 
 public class MovementPhysics : MonoBehaviour
 {
-    //position where you press on screen
-    private Vector3 mousePressDownPos;
+
+    //if (Application.platform == RuntimePlatform.Android)
+    //{
+    //    Debug.Log("Do something special here!");
+    //}
+
+    //if (Application.platform == RuntimePlatform.Windows)
+    //{
+    //    Debug.Log("Do something special here!");
+    //}
+
+#region Ordenador
+
+//position where you press on screen
+private Vector3 mousePressDownPos;
     //position where you release on screen
     private Vector3 mouseReleasePos;
 
@@ -112,12 +125,9 @@ public class MovementPhysics : MonoBehaviour
         {
             rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
         }
-            
-        
-        
     }
 
-   
 
 
+    #endregion
 }
