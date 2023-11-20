@@ -25,10 +25,10 @@ public class GameController : MonoBehaviour
 
     private int scoreToAdd = 2;
 
-    private int totalTimeNormal = 10;
+    private int totalTimeNormal = 4;
 
 
-    private int actualTime = 0;
+    private float actualTime = 0;
 
 
 
@@ -52,12 +52,12 @@ public class GameController : MonoBehaviour
     }
 
 
-    public int GetActualTime()
+    public float GetActualTime()
     {
         return actualTime;
     }
 
-    public int GetTotalTimeNormal()
+    public float GetTotalTimeNormal()
     {
         return totalTimeNormal;
     }
@@ -110,8 +110,24 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //si el tiempo actual < tiempo total
+        if (GetActualTime() < GetTotalTimeNormal())
+        {
+            //se suma 1 al cronometro actual
+            actualTime += Time.deltaTime;
+            //se pone por pantalla
+            UIManager.instance.UpdateTimer(actualTime);
+            //se espera 1 segundo hasta reiniciar proceso
+        }
+        else
+        {
+            //al llegar al totalTime llamamos a metodo de GameManager
+            SetTimerAcabado(true);
+            //giramos camara
+            UIManager.instance.ComenzarCorrutinaCamara();
+        }
     }
+
 
 
     public bool GetTimerAcabado()
@@ -129,7 +145,6 @@ public class GameController : MonoBehaviour
             ReiniciarTime();
             //timerAcabado = false
             timerAcabado = false;
-            UIManager.instance.ComenzarCorrutinaTimer();
         }
     }
 

@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     public Camera cam;
 
-    private float velocidadRotacion = 1f;
+    private float velocidadRotacion = 0.5f;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         textScore.text = "Score " + totalScore;
     }
 
-    public void UpdateTimer(int totalTimer)
+    public void UpdateTimer(float totalTimer)
     {
         timer.text = "Time: " + totalTimer;
     }
@@ -46,13 +46,12 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         textScore.text = "Score: 0";
-        //empezar corrutina timer
-        ComenzarCorrutinaTimer();
+
     }
 
-    public void ComenzarCorrutinaTimer()
+    public void ComenzarCorrutinaCamara()
     {
-        StartCoroutine(TimerFisicasNormales());
+        StartCoroutine(CamaraRotation());
     }
 
 
@@ -64,62 +63,31 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private IEnumerator TimerFisicasNormales()
-    {
-       
-            //se hace mientras cronómetro no llegue al maximo, timerAcabado = false
-            while (!GameController.instance.GetTimerAcabado())
-            {
-                //si el tiempo actual < tiempo total
-                if (GameController.instance.GetActualTime() < GameController.instance.GetTotalTimeNormal())
-                {
-                    //se suma 1 al cronometro actual
-                    GameController.instance.AddActualTime(1);
-                    int actualTime = GameController.instance.GetActualTime();
-                    //se pone por pantalla
-                    UpdateTimer(actualTime);
-                    //se espera 1 segundo hasta reiniciar proceso
-                    yield return new WaitForSeconds(1f);
-                }
-                //si ha superado el tiempo máximo de 10 segundos reiniciamos tiempo, giramos camara
-                else
-                {
-                    #region comportamientoCamara
-                        Debug.Log("Efecto camara iniciado!");
-                        // Le sumas 180 en el eje Z
-                        // Calcula la rotación final sumando 180 grados al eje Z
-                        Quaternion rotacionFinal = cam.transform.rotation * Quaternion.Euler(0, 0, 180);
-                        // Utiliza Lerp para interpolar suavemente entre la rotación actual y la rotación final
-                        float t = 0f;
+    private IEnumerator CamaraRotation()
+    {     
+        Debug.Log("Efecto camara iniciado!");
+        // Le sumas 180 en el eje Z
+        // Calcula la rotación final sumando 180 grados al eje Z
+        Quaternion rotacionFinal = cam.transform.rotation * Quaternion.Euler(0, 0, 180);
+        // Utiliza Lerp para interpolar suavemente entre la rotación actual y la rotación final
+        float t = 0f;
 
-                        while (t < 1f)
-                        {
-                            t += Time.deltaTime * velocidadRotacion;
+        while (t < 1f)
+        {
+            t += Time.deltaTime * velocidadRotacion;
 
-                            // Utiliza Lerp para aplicar una rotación gradual
-                            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, rotacionFinal, t);
+            // Utiliza Lerp para aplicar una rotación gradual
+            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, rotacionFinal, t);
 
-                            // Pausa hasta el próximo frame para evitar bloquear la ejecución del juego
-                            // y permitir que la rotación sea suave
-                            yield return null;
-                        }
+            // Pausa hasta el próximo frame para evitar bloquear la ejecución del juego
+            // y permitir que la rotación sea suave
+            yield return null;
+        }
 
-                        // Asegúrate de que la rotación final sea exacta
-                        cam.transform.rotation = rotacionFinal;
+        // Asegúrate de que la rotación final sea exacta
+        cam.transform.rotation = rotacionFinal;
 
-                        Debug.Log("Efecto camara acabado!");
-                    #endregion
-                    //al llegar al totalTime llamamos a metodo de GameManager
-                    GameController.instance.SetTimerAcabado(true);
-                    //parar corrutina
-                    break;
-                }
-
-            }
-
-
-
+        Debug.Log("Efecto camara acabado!");
     }
-
    
 }
