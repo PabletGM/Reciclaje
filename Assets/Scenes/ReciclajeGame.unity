@@ -1470,6 +1470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textScore: {fileID: 546411419}
   timer: {fileID: 1299543467}
+  cam: {fileID: 963194227}
 --- !u!1 &1299543465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,7 +1938,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1851523873}
-  cam: {fileID: 963194227}
   respawns:
   - {fileID: 2047340506}
   - {fileID: 1467288346}

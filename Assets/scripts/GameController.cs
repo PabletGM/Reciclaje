@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    public Camera cam;
+
 
     //array de objetos que sean puntos respawneables donde haya basura
     [SerializeField]
@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour
 
     private int actualTime = 0;
 
-    private float velocidadRotacion = 0.01f;
+
 
 
     private bool timerAcabado = false;
@@ -113,37 +113,6 @@ public class GameController : MonoBehaviour
 
     }
 
-    private IEnumerator EfectoGirarCamara()
-    {
-        Debug.Log("Efecto camara iniciado!");
-        // Le sumas 180 en el eje Z
-        // Calcula la rotación final sumando 180 grados al eje Z
-        Quaternion rotacionFinal = cam.transform.rotation * Quaternion.Euler(0, 0, 180);
-        // Utiliza Lerp para interpolar suavemente entre la rotación actual y la rotación final
-        float t = 0f;
-
-        while (t < 1f)
-        {
-            t += Time.deltaTime * velocidadRotacion;
-
-            // Utiliza Lerp para aplicar una rotación gradual
-            cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, rotacionFinal, t);
-
-            // Pausa hasta el próximo frame para evitar bloquear la ejecución del juego
-            // y permitir que la rotación sea suave
-            yield return null;
-        }
-
-        // Asegúrate de que la rotación final sea exacta
-        cam.transform.rotation = rotacionFinal;
-
-        Debug.Log("Efecto camara acabado!");
-        StopAllCoroutines();
-        UIManager.instance.ComenzarCorrutinaTimer();
-
-
-
-    }
 
     public bool GetTimerAcabado()
     {
@@ -158,10 +127,9 @@ public class GameController : MonoBehaviour
         {
             //se reinicia contador a 0
             ReiniciarTime();
-            //efecto girar camara
-            StartCoroutine(EfectoGirarCamara());
             //timerAcabado = false
             timerAcabado = false;
+            UIManager.instance.ComenzarCorrutinaTimer();
         }
     }
 
