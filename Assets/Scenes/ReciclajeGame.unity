@@ -2034,6 +2034,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1107162467406871689, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+      propertyPath: power
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1107162467406871689, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+      propertyPath: maxDrag
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2921647940487136594, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -2081,6 +2089,10 @@ PrefabInstance:
     - target: {fileID: 7822892491259680595, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822892491259680595, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9045942631958463653, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
       propertyPath: m_Materials.Array.data[0]
