@@ -28,7 +28,7 @@ public class MovementPhysics : MonoBehaviour
         //force of the shoot
         private float forceMultiplier =1f;
 
-        private float maxDistance = 80;
+        private float maxDistance = 30;
 
         private Rigidbody rb;
 
@@ -209,11 +209,11 @@ public class MovementPhysics : MonoBehaviour
         //Debug.Log(touch.position);
 
         Vector3 forceInit = (draggingPos - dragStartPos);
-        Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * power;
+        Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y));
 
 
 
-        float distance = Vector3.Distance(dragStartPos, draggingPos) / 10;
+        float distance = Vector3.Distance(dragStartPos, draggingPos)/10;
         Debug.Log(distance);
         if (distance <= maxDistance && canShoot)
         {
@@ -242,7 +242,7 @@ public class MovementPhysics : MonoBehaviour
 
         
 
-        rb.AddForce(-clampedforce);
+        rb.AddForce(clampedforce);
         //Debug.Log(-clampedforce);
         //this.gameObject.transform.localScale = new Vector3(1, 1, 1);
     }
