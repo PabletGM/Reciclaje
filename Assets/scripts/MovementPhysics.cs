@@ -71,7 +71,7 @@ public class MovementPhysics : MonoBehaviour
         #region Movil
         //if (Application.platform == RuntimePlatform.Android)
         //{
-            if(Input.touchCount > 0)
+            if(Input.touchCount > 0 && canShoot)
             {
                 //Debug.Log("detectar input");
                 //primer toque
@@ -106,37 +106,37 @@ public class MovementPhysics : MonoBehaviour
     /// </summary>
     private void OnMouseDown()
     {
-        //#region Ordenador
-        //if (Application.platform == RuntimePlatform.WindowsEditor)
-        //{
-        //    mousePressDownPos = Input.mousePosition;
-        //}
-        //#endregion
+        #region Ordenador
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            mousePressDownPos = Input.mousePosition;
+        }
+        #endregion
     }
 
     //se llama cuando se acaba de hacer el drag
     private void OnMouseDrag()
     {
-        //#region Ordenador
+        #region Ordenador
 
-        //    if (Application.platform == RuntimePlatform.WindowsEditor)
-        //{
-        //    //fuerza inicial
-        //    Vector3 forceInit = (Input.mousePosition - mousePressDownPos);
-        //    Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * forceMultiplier;
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            //fuerza inicial
+            Vector3 forceInit = (Input.mousePosition - mousePressDownPos);
+            Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * forceMultiplier;
 
-        //    float distance = Vector3.Distance(Input.mousePosition, mousePressDownPos) * forceMultiplier;
-        //    //Debug.Log(distance);
-        //    if (distance <= maxDistance && canShoot)
-        //    {
-        //        DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
-        //    }
-        //    else
-        //    {
-        //        DrawTrajectory.Instance.HideLine();
-        //    }
-        //}
-        //#endregion
+            float distance = Vector3.Distance(Input.mousePosition, mousePressDownPos) * forceMultiplier;
+            //Debug.Log(distance);
+            if (distance <= maxDistance && canShoot)
+            {
+                DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
+            }
+            else
+            {
+                DrawTrajectory.Instance.HideLine();
+            }
+        }
+        #endregion
 
     }
 
@@ -145,22 +145,22 @@ public class MovementPhysics : MonoBehaviour
     /// </summary>
     private void OnMouseUp()
     {
-        //#region Ordenador
-        //if (Application.platform == RuntimePlatform.WindowsEditor)
-        //{
-        //    DrawTrajectory.Instance.HideLine();
-        //    mouseReleasePos = Input.mousePosition;
+        #region Ordenador
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            DrawTrajectory.Instance.HideLine();
+            mouseReleasePos = Input.mousePosition;
 
-        //    //direction where the shot will go
-        //    Vector3 direction = mouseReleasePos - mousePressDownPos;
-        //    float distance = Vector3.Distance(mouseReleasePos, mousePressDownPos);
-        //    //para que tenga permiso debe detectar un raycast que está en el suelo
-        //    if (canShoot)
-        //    {
-        //        Shoot(direction, distance);
-        //    }
-        //}
-        //#endregion
+            //direction where the shot will go
+            Vector3 direction = mouseReleasePos - mousePressDownPos;
+            float distance = Vector3.Distance(mouseReleasePos, mousePressDownPos);
+            //para que tenga permiso debe detectar un raycast que está en el suelo
+            if (canShoot)
+            {
+                Shoot(direction, distance);
+            }
+        }
+        #endregion
 
     }
 
@@ -171,19 +171,19 @@ public class MovementPhysics : MonoBehaviour
     {
 
         //si quieres que sea misma fuerza todos los tiros
-        //rb.AddForce(new Vector3(-Force.x, -Force.y,0).normalized * forceMultiplier);
+        //rb.AddForce(new Vector3(-Force.x, -Force.y, 0).normalized * forceMultiplier);
         //si quieres que se pueda recargar y cuanto mas tirachinas mas fuerte
-        //#region Ordenador
-        //if (Application.platform == RuntimePlatform.WindowsEditor)
-        //{
-        //    //si supera limites de fuerza no tiramos
+        #region Ordenador
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            //si supera limites de fuerza no tiramos
 
-        //    if (distance <= maxDistance)
-        //    {
-        //        rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
-        //    }
-        //}
-        //#endregion
+            if (distance <= maxDistance)
+            {
+                rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
+            }
+        }
+        #endregion
     }
 
     #endregion
@@ -196,6 +196,8 @@ public class MovementPhysics : MonoBehaviour
         dragStartPos = touch.position;
         dragStartPos.z = 0;
         //Debug.Log(dragStartPos);
+
+        
     }
 
     private void Dragging()
@@ -205,9 +207,27 @@ public class MovementPhysics : MonoBehaviour
         Vector3 draggingPos = touch.position;
         draggingPos.z = 0f;
         //Debug.Log(touch.position);
+
+        Vector3 forceInit = (draggingPos - dragStartPos);
+        Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * power;
+
+
+
+        float distance = Vector3.Distance(dragStartPos, draggingPos) / 10;
+        Debug.Log(distance);
+        if (distance <= maxDistance && canShoot)
+        {
+            Debug.Log("Renderizaste");
+            DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
+        }
+        else
+        {
+            DrawTrajectory.Instance.HideLine();
+        }
     }
     private void DragRelease()
     {
+        DrawTrajectory.Instance.HideLine();
         //Vector3 dragReleasePos = Camera.main.ScreenToWorldPoint(touch.position);
         Vector3 dragReleasePos = touch.position;
         //Debug.Log(dragReleasePos);
@@ -218,18 +238,9 @@ public class MovementPhysics : MonoBehaviour
         Vector3 clampedforce = Vector3.ClampMagnitude(force, maxDrag) * power;
 
         //Vector3 clampedforce = force * power;
-        Debug.Log(clampedforce);
+        /*Debug.Log(clampedforce)*/;
 
-        float distance = Vector3.Distance(dragStartPos, dragReleasePos) * power;
-        //Debug.Log(distance);
-        if (distance <= maxDistance && canShoot)
-        {
-            DrawTrajectory.Instance.UpdateTrajectory(clampedforce, rb, Vector3.zero);
-        }
-        else
-        {
-            DrawTrajectory.Instance.HideLine();
-        }
+        
 
         rb.AddForce(-clampedforce);
         //Debug.Log(-clampedforce);
