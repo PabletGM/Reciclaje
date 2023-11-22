@@ -41,7 +41,7 @@ public class MovementPhysics : MonoBehaviour
 
 
     #region Mobile
-        public float power =1.5f;
+        public float power =2f;
         public float maxDrag = 40f;
 
         Vector3 dragStartPos;
@@ -54,8 +54,22 @@ public class MovementPhysics : MonoBehaviour
     private void Update()
     {
         #region Ordenador
-        // Lanza un rayo hacia abajo desde la posición del jugador
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, raycastDistance, groundLayer);
+        // Lanza un rayo hacia abajo desde la posición del jugador centrica
+        
+        // Lanza otros 2 raycast en las esquinas del player para que lo pille
+        bool raycast1 = Physics.Raycast(new Vector3(transform.position.x + 0.6f, transform.position.y, transform.position.z), Vector3.down, raycastDistance, groundLayer);
+        bool raycast2 = Physics.Raycast(new Vector3(transform.position.x - 0.6f, transform.position.y, transform.position.z), Vector3.down, raycastDistance, groundLayer);
+        bool raycast3 = Physics.Raycast(transform.position, Vector3.down, raycastDistance, groundLayer);
+
+        if(raycast1 || raycast2 || raycast3)
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+        
 
         // Comprueba si el jugador está en el suelo
         if (isGrounded)
@@ -218,11 +232,11 @@ public class MovementPhysics : MonoBehaviour
 
 
         float distance = Vector3.Distance(dragStartPos, draggingPos)/10;
-        Debug.Log(distance);
-        if (distance <= maxDistance && canShoot)
+        Debug.Log(forceV);
+        if (distance <= (maxDistance-10) && canShoot)
         {
             Debug.Log("Renderizaste");
-            DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
+            DrawTrajectory.Instance.UpdateTrajectory(forceV/1.5f, rb, Vector3.zero);
         }
         else
         {
