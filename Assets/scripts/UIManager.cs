@@ -83,7 +83,8 @@ public class UIManager : MonoBehaviour
     }
 
     private IEnumerator CamaraRotation()
-    {     
+    {
+        AudioManagerReciclaje.instance.PlaySFX("cameraGiro");
         Debug.Log("Efecto camara iniciado!");
         // Le sumas 180 en el eje Z
         // Calcula la rotación final sumando 180 grados al eje Z

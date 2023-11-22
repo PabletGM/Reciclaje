@@ -21,6 +21,7 @@ public class CollectRubbish : MonoBehaviour
         //si el objeto con el que choca es player
         if(other.gameObject.tag == "player")
         {
+            AudioManagerReciclaje.instance.PlaySFX("papel");
             //añadimos puntuacion al player
             GameController.instance.SumarPuntuacion();
             //desactivamos objeto

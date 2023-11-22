@@ -110,6 +110,7 @@ public class MovementPhysics : MonoBehaviour
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
             mousePressDownPos = Input.mousePosition;
+            AudioManagerReciclaje.instance.PlaySFX("recargar");
         }
         #endregion
     }
@@ -157,6 +158,8 @@ public class MovementPhysics : MonoBehaviour
             //para que tenga permiso debe detectar un raycast que está en el suelo
             if (canShoot)
             {
+                AudioManagerReciclaje.instance.StopSFX();
+                AudioManagerReciclaje.instance.PlaySFX("saltar");
                 Shoot(direction, distance);
             }
         }
@@ -196,8 +199,9 @@ public class MovementPhysics : MonoBehaviour
         dragStartPos = touch.position;
         dragStartPos.z = 0;
         //Debug.Log(dragStartPos);
+        AudioManagerReciclaje.instance.PlaySFX("recargar");
 
-        
+
     }
 
     private void Dragging()
@@ -240,11 +244,12 @@ public class MovementPhysics : MonoBehaviour
         //Vector3 clampedforce = force * power;
         /*Debug.Log(clampedforce)*/;
 
-        
-
+        AudioManagerReciclaje.instance.StopSFX();
+        AudioManagerReciclaje.instance.PlaySFX("saltar");
         rb.AddForce(clampedforce);
         //Debug.Log(-clampedforce);
         //this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+        
     }
     #endregion
 }
