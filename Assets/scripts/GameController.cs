@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class GameController : MonoBehaviour
     private GameObject basura;
 
     private int totalScore =0;
+
+    private int maxScore = 12;
 
     private int scoreToAdd = 2;
 
@@ -62,6 +65,11 @@ public class GameController : MonoBehaviour
         return totalTimeNormal;
     }
 
+    public void Win()
+    {
+        UIManager.instance.SetWinPanel(true);
+    }
+
 
 
     //añade 1 segundo al cronometro actual
@@ -99,6 +107,11 @@ public class GameController : MonoBehaviour
         
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene("ReciclajeGame");
+    }
+
     public void SumarPuntuacion()
     {
         //se añade puntuacion
@@ -125,6 +138,18 @@ public class GameController : MonoBehaviour
             SetTimerAcabado(true);
             //giramos camara
             UIManager.instance.ComenzarCorrutinaCamara();
+        }
+
+        //condicion de victoria
+        ConditionVictory();
+
+    }
+
+    public void ConditionVictory()
+    {
+        if(totalScore >= maxScore)
+        {
+            Win();
         }
     }
 

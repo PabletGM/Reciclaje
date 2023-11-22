@@ -23,6 +23,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject canvasPlayer;
 
+    [SerializeField]
+    private GameObject panelWin;
+
 
     private void Awake()
     {
@@ -108,6 +111,12 @@ public class UIManager : MonoBehaviour
         cam.transform.rotation = rotacionFinal;
 
         Debug.Log("Efecto camara acabado!");
+    }
+
+    public void SetWinPanel(bool set)
+    {
+        canvasPlayer.SetActive(set);
+        panelWin.SetActive(set);
     }
    
 }
