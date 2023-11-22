@@ -26,13 +26,19 @@ public class AudioManagerReciclaje : MonoBehaviour
 
     private void Start()
     {
-        PlayMusicGame();
+        PlayMusicPanelInicio();
     }
 
     public void PlayMusicGame()
     {
         PlayMusic("game");
     }
+
+    public void PlayMusicPanelInicio()
+    {
+        PlayMusic("panelInicio");
+    }
+
 
     public void PlayMusic(string name)
     {

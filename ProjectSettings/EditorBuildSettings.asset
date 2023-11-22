@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PanelInicio.unity
+    guid: 12af94410df1b004aa830882464db66f
+  - enabled: 1
     path: Assets/Scenes/ReciclajeGame.unity
     guid: eda7fb19232c241438e014f521ae27e6
   m_configObjects: {}
