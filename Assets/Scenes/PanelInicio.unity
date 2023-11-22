@@ -808,6 +808,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d9d71465a7435664d9e073fe90f26a3b, type: 3}
   - name: saltar
     clip: {fileID: 8300000, guid: 48c043c25b45d79449ac3acaaaab4cea, type: 3}
+  - name: win
+    clip: {fileID: 8300000, guid: 3a4941322610e2e45a11a478ed0311cb, type: 3}
   musicSource: {fileID: 1496444665}
   sfxSource: {fileID: 805825782}
 --- !u!4 &1354225589

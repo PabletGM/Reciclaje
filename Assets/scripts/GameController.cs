@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour
     public void Win()
     {
         UIManager.instance.SetWinPanel(true);
+        AudioManagerReciclaje.instance.PlaySFX("win");
     }
 
 
