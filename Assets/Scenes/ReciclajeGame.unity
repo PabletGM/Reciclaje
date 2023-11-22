@@ -694,6 +694,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 626681023940482714, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 626681023940482714, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.83
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -970,6 +978,14 @@ PrefabInstance:
     - target: {fileID: 626681023512489142, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626681023940482714, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 626681023940482714, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.79
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1471,6 +1487,7 @@ MonoBehaviour:
   textScore: {fileID: 546411419}
   timer: {fileID: 1299543467}
   cam: {fileID: 963194227}
+  canvasPlayer: {fileID: 436041923976268543}
 --- !u!1 &1299543465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,11 +2115,24 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3d5d281153dd02d4b81f7eb8b4e20731, type: 2}
+    - target: {fileID: 9221981829235441744, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9835868
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221981829235441744, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11764705
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+--- !u!1 &436041923976268543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 720468160343980476, guid: a9dadc2145328da4698d6c569ee9d8c3, type: 3}
+  m_PrefabInstance: {fileID: 436041923976268542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &626681023558190564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2158,6 +2188,14 @@ PrefabInstance:
     - target: {fileID: 626681023512489142, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626681023940482714, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 626681023940482714, guid: 1ae6de3bf67d5a1489b08d528d8bcac4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.73
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

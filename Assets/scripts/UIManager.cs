@@ -20,6 +20,9 @@ public class UIManager : MonoBehaviour
 
     private float velocidadRotacion = 8f;
 
+    [SerializeField]
+    private GameObject canvasPlayer;
+
 
     private void Awake()
     {
@@ -53,10 +56,23 @@ public class UIManager : MonoBehaviour
     public void ComenzarCorrutinaCamara()
     {
 
-
+        //invocamos metodo que activa indicaciones durante 4 segundos
+        IndicacionesActivas();
         StartCoroutine(CamaraRotation());
 
        
+    }
+
+    public void IndicacionesActivas()
+    {
+        canvasPlayer.SetActive(true);
+        Invoke("DesactivarIndicacionesActivas", 4f);
+    }
+
+    public void DesactivarIndicacionesActivas()
+    {
+        canvasPlayer.SetActive(false);
+
     }
 
 
