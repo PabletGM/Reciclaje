@@ -55,12 +55,9 @@ public class UIManager : MonoBehaviour
 
     public void ComenzarCorrutinaCamara()
     {
-
         //invocamos metodo que activa indicaciones durante 4 segundos
         IndicacionesActivas();
-        StartCoroutine(CamaraRotation());
-
-       
+        StartCoroutine(CamaraRotation()); 
     }
 
     public void IndicacionesActivas()
