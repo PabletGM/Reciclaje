@@ -43,7 +43,8 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTimer(float totalTimer)
     {
-        timer.text = "Time: " + totalTimer;
+        string formattedTimer = "Time: " + totalTimer.ToString("F2");
+        timer.text = "Time: " + formattedTimer;
     }
 
     // Start is called before the first frame update
