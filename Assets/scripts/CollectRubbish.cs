@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class CollectRubbish : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+   
+    //the gift box collider activates the method
     private void OnTriggerEnter(Collider other)
     {
         //si el objeto con el que choca es player
         if(other.gameObject.tag == "player")
         {
+            //music paper
             AudioManagerReciclaje.instance.PlaySFX("papel");
-            //añadimos puntuacion al player
+            //add puntuation to player
             GameController.instance.SumarPuntuacion();
-            //desactivamos objeto
+            //gameObject desactivate
             this.gameObject.SetActive(false);
         }
     }

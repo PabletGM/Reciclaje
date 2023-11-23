@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class DrawTrajectory : MonoBehaviour
 {
-
+    //shot trayectory
     [SerializeField]
     private LineRenderer _lineRenderer;
 
+    //number of parts of the line
     [SerializeField]
     private int _lineSegmentCount;
-
     private List<Vector3> _linePoints = new List<Vector3>();
 
+    //singleton
     public static DrawTrajectory Instance;
 
     private void Awake()
@@ -21,7 +22,7 @@ public class DrawTrajectory : MonoBehaviour
     }
 
     
-
+    //physic method where the line is painted
     public void UpdateTrajectory(Vector3 forceVector, Rigidbody rigidbody, Vector3 startingPoint)
     {
         //v o aceleracion = (F * t)/m
@@ -42,11 +43,6 @@ public class DrawTrajectory : MonoBehaviour
             // a = v0 * t - 1/2*g*t*t
             Vector3 MovementVector = new Vector3(velocity.x * stepTimePassed, velocity.y * stepTimePassed - 0.5f * Physics.gravity.y * stepTimePassed * stepTimePassed, velocity.z * stepTimePassed);
 
-            //RaycastHit hit;
-            //if (Physics.Raycast(startingPoint, -MovementVector, out hit, MovementVector.magnitude))
-            //{
-            //    break;
-            //}
             _linePoints.Add(-MovementVector + startingPoint);
         }
 
@@ -55,6 +51,7 @@ public class DrawTrajectory : MonoBehaviour
         _linePoints.Clear();
     }
 
+    //hide the line when is called
     public void HideLine()
     {
         _lineRenderer.positionCount = 0;
