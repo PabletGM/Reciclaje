@@ -26,11 +26,12 @@ public class MovementPhysics : MonoBehaviour
         private Vector3 mouseReleasePos;
 
         //force of the shoot
-        private float forceMultiplier =1f;
+        private float forceMultiplier =0.5f;
 
         private float maxDistance = 30;
+        private float maxDistanceOrdenador = 140;
 
-        private Rigidbody rb;
+    private Rigidbody rb;
 
         public float raycastDistance = 0.1f; // Distancia del rayo hacia abajo
         public LayerMask groundLayer; // Capa que representa el suelo
@@ -46,6 +47,9 @@ public class MovementPhysics : MonoBehaviour
 
         Vector3 dragStartPos;
         Touch touch;
+
+    [SerializeField]
+    private ParticleSystem vfx;
 
 
 
@@ -142,7 +146,7 @@ public class MovementPhysics : MonoBehaviour
 
             float distance = Vector3.Distance(Input.mousePosition, mousePressDownPos) * forceMultiplier;
             //Debug.Log(distance);
-            if (distance <= maxDistance && canShoot)
+            if (distance <= maxDistanceOrdenador+40 && canShoot)
             {
                 DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
             }
@@ -172,6 +176,7 @@ public class MovementPhysics : MonoBehaviour
             //para que tenga permiso debe detectar un raycast que está en el suelo
             if (canShoot)
             {
+                SetParticleSystem(true);
                 AudioManagerReciclaje.instance.StopSFX();
                 AudioManagerReciclaje.instance.PlaySFX("saltar");
                 Shoot(direction, distance);
@@ -181,7 +186,19 @@ public class MovementPhysics : MonoBehaviour
 
     }
 
+    private void SetParticleSystem(bool set)
+    {
+        //si es true
+        if(set)
+        {
+            //activamos vfx
+            vfx.Play();               
+        }
 
+        vfx.gameObject.SetActive(set);
+
+
+    }
 
     //shooting with force on Y axis
     void Shoot(Vector3 Force, float distance)
@@ -194,9 +211,10 @@ public class MovementPhysics : MonoBehaviour
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
             //si supera limites de fuerza no tiramos
-
-            if (distance <= maxDistance)
+            Debug.Log(distance);
+            if (distance <= maxDistanceOrdenador + 40)
             {
+                Debug.Log("shot");
                 rb.AddForce(new Vector3(-Force.x, -Force.y, 0) * forceMultiplier);
             }
         }
@@ -257,7 +275,7 @@ public class MovementPhysics : MonoBehaviour
 
         //Vector3 clampedforce = force * power;
         /*Debug.Log(clampedforce)*/;
-
+        SetParticleSystem(true);
         AudioManagerReciclaje.instance.StopSFX();
         AudioManagerReciclaje.instance.PlaySFX("saltar");
         rb.AddForce(clampedforce);

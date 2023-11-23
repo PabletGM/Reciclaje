@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTimer(float totalTimer)
     {
-        string formattedTimer = "Time: " + totalTimer.ToString("F2");
+        string formattedTimer = totalTimer.ToString("F2");
         timer.text = "Time: " + formattedTimer;
     }
 
@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
 
     public void SetWinPanel(bool set)
     {
-        canvasPlayer.SetActive(set);
+        GameController.instance.GetPlayerGameObject().SetActive(false);
         panelWin.SetActive(set);
     }
    
