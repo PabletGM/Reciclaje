@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private GameObject panelWin;
 
-
+    //singleton
     private void Awake()
     {
         if (instance != null)
@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
             instance = this;
         }
     }
+
 
     public void UpdateTextScore(int totalScore)
     {
@@ -57,6 +58,7 @@ public class UIManager : MonoBehaviour
 
     }
 
+    //changes or flips camera rotation
     public void ComenzarCorrutinaCamara()
     {
         //invocamos metodo que activa indicaciones durante 4 segundos
@@ -64,11 +66,13 @@ public class UIManager : MonoBehaviour
         StartCoroutine(CamaraRotation()); 
     }
 
+    //the tutorial of the trayectory or your finger to draw the drag each 4 seconds
     public void IndicacionesActivas()
     {
         canvasPlayer.SetActive(true);
         Invoke("DesactivarIndicacionesActivas", 4f);
     }
+
 
     public void DesactivarIndicacionesActivas()
     {
@@ -85,11 +89,12 @@ public class UIManager : MonoBehaviour
         
     }
 
+    //camera rotatuion
     private IEnumerator CamaraRotation()
     {
         AudioManagerReciclaje.instance.PlaySFX("cameraGiro");
         Debug.Log("Efecto camara iniciado!");
-        // Le sumas 180 en el eje Z
+       
         // Calcula la rotación final sumando 180 grados al eje Z
         Quaternion rotacionFinal = cam.transform.rotation * Quaternion.Euler(0, 0, 180);
         // Utiliza Lerp para interpolar suavemente entre la rotación actual y la rotación final
@@ -113,6 +118,7 @@ public class UIManager : MonoBehaviour
         Debug.Log("Efecto camara acabado!");
     }
 
+    //set win panel
     public void SetWinPanel(bool set)
     {
         GameController.instance.GetPlayerGameObject().SetActive(false);

@@ -15,7 +15,7 @@ public class ShowCursor : MonoBehaviour
     [SerializeField]
     private CursorMode _cursorMode = CursorMode.Auto;
 
-    // Start is called before the first frame update
+    //cursor initial
     void Start()
     {
         Cursor.SetCursor(ReleasedState, _hotspot, _cursorMode);
@@ -24,6 +24,7 @@ public class ShowCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //different states of cursor
         if(Input.GetMouseButton(0))
         {
             Cursor.SetCursor(PressedState, _hotspot, _cursorMode);
