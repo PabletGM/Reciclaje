@@ -8,8 +8,10 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    //singleton
     public static GameController instance;
 
+    //player
     [SerializeField]
     private GameObject player;
 
@@ -19,23 +21,17 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameObject[] respawns;
 
+    //prefab rubbish
     [SerializeField]
     private GameObject basura;
 
     private int totalScore =0;
-
     private int maxScore = 12;
-
     private int scoreToAdd = 2;
-
     private int totalTimeNormal = 10;
-
-
     private float actualTime = 0;
-
-
-
-
+    
+    //to flip the camera as a message
     private bool timerAcabado = false;
 
 
@@ -54,17 +50,19 @@ public class GameController : MonoBehaviour
         }
     }
 
-
+    //number of seconds since the last flip of the camera
     public float GetActualTime()
     {
         return actualTime;
     }
 
+    //max seconds to the camara to flip
     public float GetTotalTimeNormal()
     {
         return totalTimeNormal;
     }
 
+    //Win panel
     public void Win()
     {
         UIManager.instance.SetWinPanel(true);
@@ -73,13 +71,13 @@ public class GameController : MonoBehaviour
 
 
 
-    //añade 1 segundo al cronometro actual
+    //add 1 second to the actual cronometre
     public void AddActualTime(int second)
     {
         actualTime += second;
     }
 
-    //reinicia timer
+    //restart time on each flip of the camera
     public void ReiniciarTime()
     {
         actualTime =0;
@@ -87,16 +85,7 @@ public class GameController : MonoBehaviour
     }
 
 
-
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    //pones basura en todos los spots o position
+    //put the rubbish on each spot on the map
     public void AparecerBasura()
     {
         //iniciamos basura en todos los spots
@@ -108,11 +97,13 @@ public class GameController : MonoBehaviour
         
     }
 
+    //restart game
     public void Restart()
     {
         SceneManager.LoadScene("ReciclajeGame");
     }
 
+    //add score
     public void SumarPuntuacion()
     {
         //se añade puntuacion
@@ -121,7 +112,6 @@ public class GameController : MonoBehaviour
         UIManager.instance.UpdateTextScore(totalScore);
     }
 
-    // Update is called once per frame
     void Update()
     {
         //si el tiempo actual < tiempo total
@@ -146,6 +136,7 @@ public class GameController : MonoBehaviour
 
     }
 
+    
     public void ConditionVictory()
     {
         if(totalScore >= maxScore)
@@ -155,11 +146,7 @@ public class GameController : MonoBehaviour
     }
 
 
-
-    public bool GetTimerAcabado()
-    {
-        return timerAcabado;
-    }
+    
 
     public void SetTimerAcabado(bool set)
     {
@@ -174,6 +161,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //reference to the player
     public GameObject GetPlayerGameObject()
     {
         return player;

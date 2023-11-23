@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    // Ajusta la velocidad de suavizado
+    //lerp speed
     public float smoothSpeed = 1f; 
 
-    //FollowPlayer con suavizado
+    //FollowPlayer with lerp, with fixedUpdate to have more lerp
     private void FixedUpdate()//update, lateupdate y fixedUpdate
     {
         BuscarPosicionPlayer();
     }
 
+    //move the camera to player on X,Y with lerp
     private void BuscarPosicionPlayer()
     {
 
