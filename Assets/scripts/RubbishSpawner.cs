@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class RubbishSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //gives the order to put each spot with a rubbish prefab
     void Start()
     {
         //aparece basura
         GameController.instance.AparecerBasura();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

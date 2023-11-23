@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponent(typeof(Rigidbody))]
-//[RequireComponent(typeof(Collider))]
 
 public class MovementPhysics : MonoBehaviour
 {
@@ -31,7 +29,7 @@ public class MovementPhysics : MonoBehaviour
         private float maxDistance = 30;
         private float maxDistanceOrdenador = 250;
 
-    private Rigidbody rb;
+        private Rigidbody rb;
 
         public float raycastDistance = 0.1f; // Distancia del rayo hacia abajo
         public LayerMask groundLayer; // Capa que representa el suelo
@@ -48,13 +46,14 @@ public class MovementPhysics : MonoBehaviour
         Vector3 dragStartPos;
         Touch touch;
 
-    [SerializeField]
-    private ParticleSystem vfx;
+        [SerializeField]
+        private ParticleSystem vfx;
 
 
 
         #endregion
 
+    //ground comprobation to access to the jump
     private void Update()
     {
         #region Ordenador
@@ -133,7 +132,7 @@ public class MovementPhysics : MonoBehaviour
         #endregion
     }
 
-    //se llama cuando se acaba de hacer el drag
+    //drag
     private void OnMouseDrag()
     {
         #region Ordenador
@@ -144,8 +143,9 @@ public class MovementPhysics : MonoBehaviour
             Vector3 forceInit = (Input.mousePosition - mousePressDownPos);
             Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y)) * forceMultiplier;
 
+            //distance from the start point and the last point
             float distance = Vector3.Distance(Input.mousePosition, mousePressDownPos) * forceMultiplier;
-            //Debug.Log(distance);
+            //condition to draw trajectory if it´s on the ground
             if (distance <= maxDistanceOrdenador+40 && canShoot)
             {
                 DrawTrajectory.Instance.UpdateTrajectory(forceV, rb, Vector3.zero);
@@ -186,6 +186,7 @@ public class MovementPhysics : MonoBehaviour
 
     }
 
+    //when you jump vfx
     private void SetParticleSystem(bool set)
     {
         //si es true
@@ -194,19 +195,14 @@ public class MovementPhysics : MonoBehaviour
             //activamos vfx
             vfx.Play();               
         }
-
         vfx.gameObject.SetActive(set);
-
-
     }
 
     //shooting with force on Y axis
     void Shoot(Vector3 Force, float distance)
     {
 
-        //si quieres que sea misma fuerza todos los tiros
-        //rb.AddForce(new Vector3(-Force.x, -Force.y, 0).normalized * forceMultiplier);
-        //si quieres que se pueda recargar y cuanto mas tirachinas mas fuerte
+        
         #region Ordenador
         if (Application.platform == RuntimePlatform.WindowsEditor)
         {
@@ -224,25 +220,22 @@ public class MovementPhysics : MonoBehaviour
     #endregion
 
     #region Movil
+
+    //first touch position on mobile
     private void DragStart()
     {
-        //this.gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        //dragStartPos = Camera.main.ScreenToWorldPoint(touch.position);
         dragStartPos = touch.position;
         dragStartPos.z = 0;
-        //Debug.Log(dragStartPos);
         AudioManagerReciclaje.instance.PlaySFX("recargar");
-
-
     }
 
+    //touch position while drag
     private void Dragging()
     {
-        //this.gameObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        //Vector3 draggingPos = Camera.main.ScreenToWorldPoint(touch.position);
+        
         Vector3 draggingPos = touch.position;
         draggingPos.z = 0f;
-        //Debug.Log(touch.position);
+
 
         Vector3 forceInit = (draggingPos - dragStartPos);
         Vector3 forceV = (new Vector3(forceInit.x, forceInit.y, forceInit.y));
@@ -261,26 +254,22 @@ public class MovementPhysics : MonoBehaviour
             DrawTrajectory.Instance.HideLine();
         }
     }
+
+    //last touch pos
     private void DragRelease()
     {
         DrawTrajectory.Instance.HideLine();
-        //Vector3 dragReleasePos = Camera.main.ScreenToWorldPoint(touch.position);
         Vector3 dragReleasePos = touch.position;
-        //Debug.Log(dragReleasePos);
         dragReleasePos.z = 0f;
 
         Vector3 force = (dragStartPos - dragReleasePos)/10;
-        //Debug.Log(force);
         Vector3 clampedforce = Vector3.ClampMagnitude(force, maxDrag) * power;
-
-        //Vector3 clampedforce = force * power;
-        /*Debug.Log(clampedforce)*/;
+;
         SetParticleSystem(true);
         AudioManagerReciclaje.instance.StopSFX();
         AudioManagerReciclaje.instance.PlaySFX("saltar");
         rb.AddForce(clampedforce);
-        //Debug.Log(-clampedforce);
-        //this.gameObject.transform.localScale = new Vector3(1, 1, 1);
+
         
     }
     #endregion
