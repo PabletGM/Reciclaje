@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//generic script for music
+
 public class AudioManagerReciclaje : MonoBehaviour
 {
     public static AudioManagerReciclaje instance;
     public SoundReciclaje[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
 
+    //singleton
     private void Awake()
     {
         if (instance == null)
@@ -23,23 +26,25 @@ public class AudioManagerReciclaje : MonoBehaviour
     }
 
 
-
+    //initial music
     private void Start()
     {
         PlayMusicPanelInicio();
     }
 
+    //gameplay music
     public void PlayMusicGame()
     {
         PlayMusic("game");
     }
 
+    //music panelInicio
     public void PlayMusicPanelInicio()
     {
         PlayMusic("panelInicio");
     }
 
-
+    
     public void PlayMusic(string name)
     {
         //buscamos la musica que queremos poner en el musicSound
@@ -95,12 +100,8 @@ public class AudioManagerReciclaje : MonoBehaviour
         }
     }
 
-    public void PonerVolumenNormal()
-    {
-        //subimos volumen de musica normal
-        musicSource.volume = 1f;
-    }
-
+   
+    //stop vfx music
     public void StopSFX()
     {
         sfxSource.Stop();
@@ -108,30 +109,11 @@ public class AudioManagerReciclaje : MonoBehaviour
 
 
     //sonidos de canvas como botones se llaman desde aqui
-
     public void PulsarBotonSound()
     {
         //sonido pala golpe al acabar animacion
         PlaySFX("clickButton");
     }
 
-    public void ToggleMusic()
-    {
-        musicSource.mute = !musicSource.mute;
-    }
-
-    public void ToggleSFX()
-    {
-        sfxSource.mute = !sfxSource.mute;
-    }
-
-    public void MusicVolume(float volume)
-    {
-        musicSource.volume = volume;
-    }
-
-    public void SFXVolume(float volume)
-    {
-        sfxSource.volume = volume;
-    }
+   
 }
