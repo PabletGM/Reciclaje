@@ -29,7 +29,7 @@ public class MovementPhysics : MonoBehaviour
         private float forceMultiplier =0.5f;
 
         private float maxDistance = 30;
-        private float maxDistanceOrdenador = 140;
+        private float maxDistanceOrdenador = 250;
 
     private Rigidbody rb;
 
